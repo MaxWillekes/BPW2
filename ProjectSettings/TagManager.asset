@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Block
   - Ball
+  - LevelManager
   layers:
   - Default
   - TransparentFX

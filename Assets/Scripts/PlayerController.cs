@@ -7,14 +7,37 @@ public class PlayerController : MonoBehaviour
 {
     BallScript ball;
     public bool autoPlay;
+    public bool faster;
+
+    public int blocksRemaining;
 
     void Start()
     {
         ball = GameObject.FindObjectOfType<BallScript>();
+
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+
+        foreach (GameObject block in blocks)
+        {
+            if (!faster)
+            {
+                blocksRemaining++;
+            }
+            else
+            {
+                blocksRemaining = 0;
+            }
+        }
+
+        if (blocksRemaining <= 0)
+        {
+            GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().LaadVolgendLevel();
+        }
     }
 
     void Update()
     {
+
         if (autoPlay == false)
         {
             Vector3 cursorPositie = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -4,14 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
-    public string levelName;
+    public int levelNumber = 1;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 
     public void LaadLevel(string levelName){
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(Application.loadedLevel);
     }
 
     public void LaadVolgendLevel(){
-        SceneManager.LoadScene(levelName);
+        levelNumber++;
+        SceneManager.LoadScene("lvl" + levelNumber);
     }
 
     public void back()

@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\BallScript.cs" />
     <Compile Include="Assets\Scripts\BlockScript.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\LevelSlidingScript.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/UnityProjects/BPW2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

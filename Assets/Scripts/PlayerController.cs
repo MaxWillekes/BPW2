@@ -53,4 +53,12 @@ public class PlayerController : MonoBehaviour
             Application.LoadLevel("menu");
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "block")
+        {
+            Debug.Log("YEET");
+        }
+    }
 }

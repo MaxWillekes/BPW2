@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class LevelSlidingScript : MonoBehaviour
 {
+    public int speed;
+    public bool playerInputEnabled;
+
+    private void Start()
+    {
+        playerInputEnabled = true;
+        Cursor.visible = false;
+    }
+
     void Update()
     {
-        transform.Translate(Vector3.down * Time.deltaTime);
+        if (playerInputEnabled)
+        {
+            transform.Translate(Vector3.down * (Time.deltaTime * speed));
+        }
     }
 }

@@ -635,8 +635,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BallScript.cs" />
-    <Compile Include="Assets\Scripts\BrickScript.cs" />
+    <Compile Include="Assets\Scripts\BlockScript.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\LevelSlidingScript.cs" />
+    <Compile Include="Assets\Scripts\MenuScript.cs" />
+    <Compile Include="Assets\Scripts\PauseScript.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,43 +4,134 @@ using UnityEngine;
 
 public class BlockScript : MonoBehaviour
 {
-
-    static int brickCount;
     public int HP;
     int hit = 0;
-    LevelManager levelmanager;
-    //public GameObject rookPref;
+
+    public GameObject ParticleObject;
+
     AudioSource audiosource;
 
-    public Sprite[] brickSprites;
+    Vector3 particleSize;
+
+    public Material debrisTree;
+    public Material debrisTower;
 
     void Start () {
-        levelmanager = GameObject.FindObjectOfType<LevelManager>();
         audiosource = GetComponent<AudioSource>();
 	}
-	
-	void Update () {
-	
-	}
 
-    void OnCollisionEnter2D(Collision2D collision){
-        if (collision.transform.name == "Ball"){
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.name == "Ball")
+        {
             hit++;
-            //GetComponent<SpriteRenderer>().sprite = brickSprites[hit];
 
             if (hit >= HP)
             {
-                //GameObject rook = Instantiate(rookPref, new Vector2(transform.position.x, transform.position.y), Quaternion.identity) as GameObject;
-                //rook.GetComponent<ParticleSystem>().startColor = GetComponent<SpriteRenderer>().color;
-                //audiosource.Play();
+                if (LevelManager.instance.levelNumber != 3)
+                {
+                    switch (gameObject.name)
+                    {
+                        case "Block Small Variant":
+                            LevelManager.instance.ScoreUp(0);
+                            particleSize = new Vector3(0.5f, 0.5f, 0.5f);
+                            break;
+                        case "Block Medium Variant":
+                            LevelManager.instance.ScoreUp(1);
+                            particleSize = new Vector3(0.75f, 0.75f, 0.75f);
+                            break;
+                        case "Block Big Variant":
+                            LevelManager.instance.ScoreUp(2);
+                            particleSize = new Vector3(1f, 1f, 1f);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (gameObject.name)
+                    {
+                        case "Block Small Variant":
+                            LevelManager.instance.ScoreUp(0);
+                            particleSize = new Vector3(0.2f, 0.2f, 0.2f);
+                            break;
+                        case "Block Medium Variant":
+                            LevelManager.instance.ScoreUp(1);
+                            particleSize = new Vector3(0.2f, 0.2f, 0.2f);
+                            break;
+                        case "Block Big Variant":
+                            LevelManager.instance.ScoreUp(2);
+                            particleSize = new Vector3(0.5f, 0.5f, 0.5f);
+                            break;
+                    }
+                }
+
+                TypeByLevelCheck();
+
                 Destroy(gameObject);
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().blocksRemaining--;
             }
         }
-        /*
-        if (brickCount == 0)
+        else if(collision.transform.name == "Player")
         {
-            levelmanager.LaadVolgendLevel();
-        }*/
+            TypeByLevelCheck();
+
+            if (LevelManager.instance.levelNumber != 3)
+            {
+                switch (gameObject.name)
+                {
+                    case "Block Small Variant":
+                        particleSize = new Vector3(0.5f, 0.5f, 0.5f);
+                        break;
+                    case "Block Medium Variant":
+                        particleSize = new Vector3(0.75f, 0.75f, 0.75f);
+                        break;
+                    case "Block Big Variant":
+                        particleSize = new Vector3(1f, 1f, 1f);
+                        break;
+                }
+            }
+            else
+            {
+                switch (gameObject.name)
+                {
+                    case "Block Small Variant":
+                        particleSize = new Vector3(0.2f, 0.2f, 0.2f);
+                        break;
+                    case "Block Medium Variant":
+                        particleSize = new Vector3(0.2f, 0.2f, 0.2f);
+                        break;
+                    case "Block Big Variant":
+                        particleSize = new Vector3(0.5f, 0.5f, 0.5f);
+                        break;
+                }
+            }
+
+            TypeByLevelCheck();
+        }
+    }
+
+    void TypeByLevelCheck()
+    {
+        ParticleObject = Instantiate(ParticleObject, new Vector2(transform.position.x, transform.position.y), Quaternion.identity) as GameObject;
+
+        if (LevelManager.instance.levelNumber == 3)
+        {
+            switch (gameObject.name)
+            {
+                case "Block Small Variant":
+                    ParticleObject.GetComponent<ParticleSystemRenderer>().material = debrisTree;
+                    break;
+                case "Block Medium Variant":
+                    ParticleObject.GetComponent<ParticleSystemRenderer>().material = debrisTree;
+                    break;
+                case "Block Big Variant":
+                    ParticleObject.GetComponent<ParticleSystemRenderer>().material = debrisTower;
+                    break;
+            }
+        }
+
+        ParticleObject.transform.localScale = (particleSize);
+        ParticleObject.transform.parent = GameObject.FindGameObjectWithTag("Level").transform;
+
+        Destroy(gameObject);
     }
 }

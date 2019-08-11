@@ -7,6 +7,24 @@ TagManager:
   - Block
   - Ball
   - LevelManager
+  - LoseScreen
+  - WinScreen
+  - PauseCanvas
+  - 1Leven
+  - 2Levens
+  - Level
+  - Pickup
+  - PullBar
+  - Score
+  - Lives
+  - EnergyBar
+  - OutOfEnergyScreen
+  - MenuAudioGameObject
+  - PullBarGroup
+  - DeathAnim
+  - DeathAnim2
+  - DeathAnime2
+  - ShipSprite
   layers:
   - Default
   - TransparentFX
